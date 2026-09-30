@@ -161,7 +161,7 @@ export const projects: Project[] = [
     demoUrl: null,
     demoStatus: 'none',
     links: [
-      { label: 'See the example PR it reviews', href: 'https://github.com/jordi-morera/ai-agents/blob/main/examples/example.diff' },
+      { label: 'See the example diff', href: 'https://github.com/jordi-morera/ai-agents/blob/main/examples/example.diff' },
     ],
     related: ['engineering-intelligence', 'skills-library'],
     group: 'ai-engineering',
