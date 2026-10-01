@@ -1,11 +1,9 @@
 name: Keep demos warm
 
-# Las demos Spring Boot viven en el free tier de Render, que duerme las instancias inactivas.
-# Las mantenemos despiertas solo en horario laboral (L-V, ~8-20h Madrid) para no agotar
-# las horas gratuitas mensuales. Fuera de ese horario, el portfolio las despierta al visitarlo.
+# Las demos Spring Boot viven en el free tier de Render, que duerme las instancias tras 15 min sin tráfico.
+# El keep-alive automático lo hace cron-job.org (L-V, 8-20h Madrid), porque los cron de GitHub no son puntuales.
+# Este workflow queda como botón manual: lánzalo para despertar las demos antes de enviar un CV.
 on:
-  schedule:
-    - cron: '*/10 6-17 * * 1-5'   # UTC
   workflow_dispatch:
 
 jobs:
