@@ -1,6 +1,13 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/site';
+import { projects } from '../data/projects';
+
+// Demos en el free tier de Render: se duermen tras un rato sin visitas.
+// Las "despertamos" en segundo plano en cuanto alguien abre el portfolio.
+const warmUpUrls = projects
+  .map((p) => p.demoUrl)
+  .filter((u): u is string => !!u && u.includes('.onrender.com'));
 
 interface Props {
   title?: string;
@@ -42,5 +49,9 @@ const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.
     <footer class="mx-auto mt-24 max-w-5xl border-t border-stone-200 px-4 py-8 text-sm text-stone-500 sm:px-6 dark:border-stone-800">
       © {new Date().getFullYear()} {site.name} · {site.location} · Built with Astro + Tailwind CSS
     </footer>
+    <script is:inline define:vars={{ warmUpUrls }}>
+      // no-cors: no necesitamos leer la respuesta, solo que Render arranque la instancia
+      warmUpUrls.forEach((u) => fetch(u, { mode: 'no-cors', cache: 'no-store' }).catch(() => {}));
+    </script>
   </body>
 </html>

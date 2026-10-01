@@ -1,0 +1,21 @@
+name: Keep demos warm
+
+# Las demos Spring Boot viven en el free tier de Render, que duerme las instancias inactivas.
+# Las mantenemos despiertas solo en horario laboral (L-V, ~8-20h Madrid) para no agotar
+# las horas gratuitas mensuales. Fuera de ese horario, el portfolio las despierta al visitarlo.
+on:
+  schedule:
+    - cron: '*/10 6-17 * * 1-5'   # UTC
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping demos
+        run: |
+          for url in \
+            https://book-service-7uad.onrender.com/actuator/health \
+            https://mytodolistapp-bgic.onrender.com/ ; do
+            curl -s -o /dev/null -w "%{http_code} $url\n" --max-time 90 "$url" || true
+          done
