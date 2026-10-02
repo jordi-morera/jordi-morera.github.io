@@ -91,9 +91,9 @@ export const projects: Project[] = [
     repo: 'jordi-morera/diario-reflexivo',
     branch: 'main',
     readmeHideSections: ['How to explain this in an interview'],
-    demoUrl: null,
-    demoStatus: 'planned',
-    demoNote: 'Demo mode with realistic pre-recorded reflections',
+    demoUrl: 'https://jordi-morera.github.io/diario-reflexivo/',
+    demoStatus: 'mock',
+    demoNote: 'Demo mode: realistic pre-recorded reflections, no backend or API cost',
     featured: true,
   },
   {
